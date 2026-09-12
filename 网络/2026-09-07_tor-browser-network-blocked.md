@@ -1,6 +1,6 @@
 # Tor 浏览器在国内网络环境的安装排障
 
-> 日期：2026-09-07 · 环境：Arch Linux · 状态：未解决（网络环境限制，方案已备好）
+> 日期：2026-09-07 · 更新：2026-09-12 · 环境：Arch Linux · 状态：✅ 已解决
 
 ## 现象
 
@@ -39,3 +39,44 @@
 
 拿到能访问 torproject.org 的网络后：代理 + 官网 tarball 下载 → 解压到
 `~/.local/share/torbrowser/tbb/x86_64` → `start-tor-browser`，5 分钟可完成。
+
+## 2026-09-12 解决记录
+
+**安装成功**（走本机 FlClash 代理 `127.0.0.1:7890`，注意不是之前 GNOME 的 7892）：
+
+1. **下载**：代理下载官方 tarball `tor-browser-linux-x86_64-15.0.22.tar.xz`（138MB，
+   HTTP 200 且 Content-Length 与官方一致）。
+2. **GPG 校验通过**：用 `~/.local/share/torbrowser/gnupg_homedir` 密钥环里的官方公钥
+   （指纹 `EF6E286DDA85EA2A4BA7DE684E2C6E8793298290`）验签成功。
+3. **解压安装**：解压到 `~/.local/share/torbrowser/tbb/x86_64/`，顶层目录
+   `tor-browser/` 与 launcher 期望路径完全匹配（`start-tor-browser.desktop` 存在即视为已装）。
+4. **标记已安装**：`~/.config/torbrowser/settings.json` 改 `"installed": true`。
+5. **快捷启动**：创建 `~/.local/bin/tor-browser`——必须**先 `cd` 到 tor-browser 目录**
+   再执行 `./start-tor-browser.desktop`，脚本内部用相对路径，直接调会报
+   `env: "./Browser/execdesktop": 没有那个文件或目录`。
+
+**连接排障**（浏览器能开、Tor 起不来）：
+
+1. 直连失败 → 从 `https://bridges.torproject.org/bridges?transport=obfs4`（走代理）申请到
+   官方 obfs4 网桥，写入 `Browser/TorBrowser/Data/Tor/torrc`：
+   ```
+   UseBridges 1
+   Bridge obfs4 <IP>:<端口> <指纹> cert=... iat-mode=0
+   ```
+   `tor --verify-config` 验证配置有效，但实际仍连不上。
+2. GUI 连接页换内置 Snowflake 网桥，也不行。
+3. **GitHub 网桥列表备选**（最终没用到）：
+   - `scriptzteam/Tor-Bridges-Collector-v2`：`bridges/obfs4_tested.txt` 229 条，
+     本机 TCP 快筛仅 **36 条可达**（其余被墙），webtunnel 全是 IPv6 本机无 IPv6 不可用；
+   - `center2055/OnionHop-Bridges-Collector`：每小时收集并 TCP 测试；
+   - 实测方法：对可达的桥逐个起临时 tor 实例（`UseBridges 1` + 单桥 + `SocksPort 0`），
+     看日志 bootstrap 是否到 100%。
+4. **最终解决：不设置代理（浏览器直连）**，成功连入——"开着代理反而连不上"。
+
+**网桥（Bridge）是什么**：Tor 的"秘密入口"。公开中继节点地址被墙全封，网桥是官方
+不公开分发的隐藏入口，obfs4 把流量混淆成普通 HTTPS 规避识别。
+
+## 最终状态
+
+✅ 已解决（2026-09-12）：Tor Browser 15.0.22 安装完成，应用菜单 / `tor-browser` 启动。
+连接需保持系统代理关闭；obfs4 网桥配置留在 torrc 中备用。
