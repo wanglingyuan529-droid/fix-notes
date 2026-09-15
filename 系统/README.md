@@ -8,3 +8,4 @@
 | 2026-09-09 | [GLava 圆形频谱 · Hyprland 配置与排障全程](2026-09-09_glava-hyprland-visualizer.md) | 自定义波形 shader + hyprwinwrap 垫底桌面层 + 音频源切换要重启；Hyprland Lua 配置改前备份、整文件写 |
 | 2026-09-08 | [蓝牙耳机 DM02 突然连不上](2026-09-08_bluetooth-dm02-reconnect.md) | 被 remove 过的设备必须重新扫描发现+配对，别急着怀疑扫描/内核坏了 |
 | 2026-09-10 | [fcitx5 5.1 主题不生效（配置文件格式变更）](2026-09-10_fcitx5-theme-not-applied.md) | 5.1.x 的 classicui.conf 改扁平键值、无 [Appearance] 段；用 D-Bus SetConfig 让 fcitx5 自己写盘最稳 |
+| 2026-09-16 | [双系统蓝牙冲突：Windows 用过耳机后 Linux 连不上](2026-09-16_bluetooth-dualboot-linkkey.md) | 双系统共用适配器但各存 link key，耳机端只认一份；重配是兜底，bt-dualboot 共享 key 是治本 |
