@@ -12,3 +12,4 @@
 | 2026-09-17 | [VSCode Java 报 non-project file](2026-09-17_vscode-java-non-project-file-maven.md) | 配置写在了子目录 `.vscode`（工作区设置只读根目录），从未生效；加 pom.xml 让插件递归识别才是解法 |
 | 2026-09-17 | [PowerShell 5.1 读写 UTF-8 中文源码导致静默损坏](2026-09-17_powershell-utf8-chinese-corruption.md) | GBK 解码把中文后的闭合引号一起吞掉，编译报"未结束的字符串文字"；改用 Node 显式 utf8 一步做完 |
 | 2026-09-17 | [DSH 插件"装了却不生效"的三类静默失败](2026-09-17_dsh-plugin-silent-failures.md) | 被 dshmarket 静默禁用 / 两插件抢同一 UI 面 / 缺 ffmpeg 静默降级；路由 404-405 与 market 日志是关键线索 |
+| 2026-09-25 | [DSH 0.1.7 升级后侧边栏 React #130 + 已消失的 git 仓库依赖](2026-09-25_dsh-017-sidebar-react130-and-dead-git-dep.md) | 收窄 peer 的插件引用被改名导出→组件解析成 undefined；升级作者 0.21.1 兼容版；`github:yq04/...` 仓库已删，移除依赖才解封 pnpm |
