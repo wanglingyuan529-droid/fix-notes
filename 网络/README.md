@@ -7,3 +7,4 @@
 | 2026-09-07 | [Tor 浏览器网络封锁排查](2026-09-07_tor-browser-network-blocked.md) | 官网被墙 + 代理节点被 Tor 拉黑，双重墙无解 |
 | 2026-09-07 | [校园网 E63073 场景拒绝](2026-09-07_campus-network-e63073.md) | 已解决：学号注册时 3/8 写反，E63073 只是模糊的凭据错误文案 |
 | 2026-09-17 | [gh-proxy 重写破坏 git push 认证](2026-09-17_gh-proxy-breaks-git-push-auth.md) | 代理 host 让 GCM 认不出 GitHub、退化成密码框（GitHub 已禁密码）；`pushInsteadOf` 恒等重写让推送直连 |
+| 2026-10-12 | [梯子开着却上不了 Google：DNS 投毒 + 订阅后端失效 + 浏览器扩展覆盖代理](2026-10-12_proxy-on-but-google-blocked.md) | 分层排查：DNS / 节点可用性 / 代理是否真生效；「走代理通、直连不通」= 部分流量绕过了代理 |
