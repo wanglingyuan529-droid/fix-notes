@@ -13,3 +13,5 @@
 | 2026-10-13 | [卸载 KDE Plasma 与 Hyprland：五个会把系统搞坏的坑](2026-10-13_kde-hyprland-removal-five-pitfalls.md) | `-Rns plasma-meta` 会连带删掉 `pipewire-pulse` 导致系统静默无声；虚拟依赖要先 `--asexplicit` 指定提供者 |
 | 2026-10-13 | [卸载 waybar 误伤共享依赖：壁纸快捷键、下拉终端、剪贴板历史集体失效](2026-10-13_waybar-removal-broke-shared-deps.md) | `-Rns` 前必须 `--print` 看级联清单；旧组件的依赖可能被新环境复用，先反查反向依赖 |
 | 2026-10-13 | [快捷键绑定的程序从未安装：nautilus 缺失导致 Mod+E 无反应](2026-10-13_nautilus-missing-mod-e-dead.md) | niri 的 `spawn` 失败是静默的；快捷键没反应先手工执行绑定命令 |
+| 2026-10-15 | [重启 logind 毁掉整个图形会话](2026-10-15_logind-restart-killed-session.md) | `systemctl restart systemd-logind` 会销毁该用户所有会话；配置类改动不需要重启服务，验证优先用只读接口 |
+| 2026-10-15 | [所有 Mod 快捷键集体失效：Win 键被键盘硬件锁定](2026-10-15_win-key-locked-diagnosis.md) | 所有 Mod 组合键同时失效时先怀疑修饰键没发出来；`evtest` 抓原始事件流是唯一可靠判据，检查顺序要从硬件往配置走 |
