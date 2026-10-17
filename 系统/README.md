@@ -15,3 +15,4 @@
 | 2026-10-13 | [快捷键绑定的程序从未安装：nautilus 缺失导致 Mod+E 无反应](2026-10-13_nautilus-missing-mod-e-dead.md) | niri 的 `spawn` 失败是静默的；快捷键没反应先手工执行绑定命令 |
 | 2026-10-15 | [重启 logind 毁掉整个图形会话](2026-10-15_logind-restart-killed-session.md) | `systemctl restart systemd-logind` 会销毁该用户所有会话；配置类改动不需要重启服务，验证优先用只读接口 |
 | 2026-10-15 | [所有 Mod 快捷键集体失效：Win 键被键盘硬件锁定](2026-10-15_win-key-locked-diagnosis.md) | 所有 Mod 组合键同时失效时先怀疑修饰键没发出来；`evtest` 抓原始事件流是唯一可靠判据，检查顺序要从硬件往配置走 |
+| 2026-10-17 | [pkill -f 把自己杀了](2026-10-17_pkill-self-match-killed-own-shell.md) | `pkill -f` 匹配完整命令行，调用者自身命令行含该串就会自杀；改用 `[y]ay` 方括号技巧或先 `pgrep` 取 PID 再 kill；破坏性操作与善后清理别绑在同一条命令 |
